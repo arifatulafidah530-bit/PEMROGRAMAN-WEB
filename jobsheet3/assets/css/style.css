@@ -1,0 +1,436 @@
+/* =========================================================
+   SIMPUS-Mini — stylesheet
+   Tema: "kartu katalog perpustakaan" — plum tua, krem hangat,
+   aksen emas tipis seperti tepi buku lama.
+   ========================================================= */
+
+:root {
+    --plum-900: #3d1638;
+    --plum-700: #5b2c83;
+    --plum-600: #6f3798;
+    --gold-500: #b8863f;
+    --gold-100: #f1e4c8;
+    --cream-50: #faf6ef;
+    --cream-100: #f3ecdf;
+    --ink-900: #2a2320;
+    --ink-600: #5c534d;
+    --line: #e4d9c8;
+    --card-shadow: 0 10px 24px -14px rgba(61, 22, 56, 0.35);
+}
+
+/* ===== Reset & Base ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: var(--ink-900);
+    background-color: var(--cream-50);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+a {
+    color: var(--plum-700);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold-500);
+    outline-offset: 2px;
+}
+
+/* ===== Header & Navbar ===== */
+header {
+    background: linear-gradient(155deg, var(--plum-900) 0%, var(--plum-700) 65%, var(--plum-600) 100%);
+    color: #fff;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 4px 16px -6px rgba(61, 22, 56, 0.5);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand:hover {
+    text-decoration: none;
+}
+
+.brand svg {
+    flex-shrink: 0;
+}
+
+.brand h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* Checkbox hack: input is invisible, label is the visible button */
+.nav-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-toggle-label:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Build the hamburger out of three bars instead of a font glyph,
+   so it can animate into an X */
+.nav-toggle-label span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+header nav a {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.35rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+header nav a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav a.active {
+    color: #fff;
+    border-bottom-color: var(--gold-500);
+}
+
+/* ===== Mobile nav (default: collapsed) ===== */
+header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--plum-900);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+    z-index: 20;
+}
+
+header nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem 0;
+}
+
+header nav a {
+    display: block;
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid transparent;
+}
+
+header nav a.active {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--gold-500);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-toggle:checked ~ nav {
+    max-height: 320px;
+}
+
+.nav-toggle-label {
+    display: flex;
+}
+
+/* ===== Desktop nav ===== */
+@media (min-width: 800px) {
+    header {
+        padding: 1rem 2rem;
+    }
+
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header nav {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        background: transparent;
+    }
+
+    header nav ul {
+        flex-direction: row;
+        gap: 1.75rem;
+        padding: 0;
+    }
+
+    header nav a {
+        padding: 0.35rem 0.1rem;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+    }
+
+    header nav a.active {
+        background: transparent;
+        border-bottom-color: var(--gold-500);
+    }
+}
+
+/* ===== Main Layout ===== */
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    background-color: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+section h2 {
+    margin-bottom: 0.35rem;
+    color: var(--plum-900);
+    font-size: 1.4rem;
+}
+
+/* ===== Hero / welcome section ===== */
+main section:first-of-type {
+    background: linear-gradient(155deg, var(--cream-100) 0%, #fff 55%);
+    border-left: 4px solid var(--gold-500);
+}
+
+main section:first-of-type h2 {
+    margin-bottom: 0.5rem;
+}
+
+main section:first-of-type p {
+    color: var(--ink-600);
+    max-width: 60ch;
+}
+
+/* ===== Kartu Statistik (Ringkasan) ===== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+}
+
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article {
+    background-color: var(--cream-100);
+    border-left: 3px solid var(--gold-500);
+    border-radius: 8px;
+    padding: 1.25rem 1.4rem;
+}
+
+main section:nth-of-type(2) article h3 {
+    font-family: "Inter", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: none;
+    color: var(--ink-600);
+    margin-bottom: 0.4rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--plum-900);
+    line-height: 1;
+}
+
+/* ===== Tabel ===== */
+.table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+}
+
+thead {
+    background-color: var(--plum-900);
+    color: #fff;
+}
+
+thead th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--cream-50);
+}
+
+tbody tr:hover {
+    background-color: var(--gold-100);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===== Button Edit & Hapus ===== */
+td button {
+    padding: 0.4rem 0.85rem;
+    margin-right: 0.4rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.83rem;
+    font-weight: 600;
+    transition: filter 0.15s ease;
+}
+
+td button:hover {
+    filter: brightness(0.94);
+}
+
+/* Button Edit / Modify */
+td button:first-of-type {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+/* Button Hapus */
+td button:last-of-type {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+/* ===== Form ===== */
+form p {
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink-600);
+}
+
+form input,
+form select {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: var(--cream-50);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 3px rgba(184, 134, 63, 0.18);
+    background-color: #fff;
+}
+
+form button[type="submit"] {
+    background-color: var(--plum-700);
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: var(--plum-900);
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--ink-600);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+    margin-top: 1rem;
+}
