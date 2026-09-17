@@ -12,93 +12,101 @@
 
 <body>
 
-    <header>
-        <a class="brand" href="../index.html">
-            <h1>SIMPUS-Mini</h1>
-        </a>
+<header>
+    <a class="brand" href="../index.html">
+        <h1><i class="bi bi-book-fill"></i> SIMPUS-Mini</h1>
+    </a>
 
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
 
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
+    <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="../index.html">
-                        <i class="bi bi-house-door-fill"></i>
-                        Beranda
-                    </a>
-                </li>
+    <nav>
+        <ul>
+            <li>
+                <a href="../index.html">
+                    <i class="bi bi-house-door-fill"></i>
+                    Beranda
+                </a>
+            </li>
 
-                <li>
-                    <a class="active" href="list.html">
-                        <i class="bi bi-book-fill"></i>
-                        Daftar Buku
-                    </a>
-                </li>
+            <li>
+                <a class="active" href="list.html">
+                    <i class="bi bi-book-fill"></i>
+                    Daftar Buku
+                </a>
+            </li>
 
-                <li>
-                    <a href="tambah.html">
-                        <i class="bi bi-plus-circle-fill"></i>
-                        Tambah Buku
-                    </a>
-                </li>
+            <li>
+                <a href="tambah.html">
+                    <i class="bi bi-plus-circle-fill"></i>
+                    Tambah Buku
+                </a>
+            </li>
 
-                <li>
-                    <a href="../anggota/list.html">
-                        <i class="bi bi-people-fill"></i>
-                        Daftar Anggota
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+            <li>
+                <a href="../anggota/list.html">
+                    <i class="bi bi-people-fill"></i>
+                    Daftar Anggota
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
+<main>
 
-        <section>
-            <h2>
-                <i class="bi bi-book-fill"></i>
-                Daftar Buku
-            </h2>
+    <section>
+        <h2>
+            <i class="bi bi-book-fill"></i>
+            Daftar Buku
+        </h2>
 
-            <p class="page-description">
-                Kelola koleksi buku SIMPUS-Mini
-            </p>
+        <p class="page-description">
+            Kelola koleksi buku SIMPUS-Mini
+        </p>
 
-            <input type="text" id="search-box" class="search-box" placeholder="Cari buku...">
+        <input
+            type="text"
+            id="search-box"
+            class="search-box"
+            placeholder="Cari buku..."
+        >
 
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Judul</th>
-                            <th>Pengarang</th>
-                            <th>Tahun</th>
-                            <th>Stok</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Pengarang</th>
+                        <th>Tahun</th>
+                        <th>Stok</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
 
-                    <tbody id="tabel-buku">
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <tbody id="tabel-buku">
+                    <tr>
+                        <td colspan="5">Memuat data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-    <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6 (Fetch API & JSON)</p>
-    </footer>
+<footer>
+    <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6 </p>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/app.js"></script>
-    <script src="../assets/js/buku.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/buku.js"></script>
 
 </body>
 </html>

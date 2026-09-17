@@ -1,9 +1,11 @@
-async function muatDaftarBuku() {
-    const tbody = document.querySelector("#tabel-buku");
+async function tampilkanBuku() {
+    const tabelBuku = document.querySelector("#tabel-buku");
 
-    if (!tbody) return;
+    if (!tabelBuku) {
+        return;
+    }
 
-    tbody.innerHTML = `
+    tabelBuku.innerHTML = `
         <tr>
             <td colspan="5">Memuat data...</td>
         </tr>
@@ -13,12 +15,12 @@ async function muatDaftarBuku() {
         const response = await fetch("../data/buku.json");
 
         if (!response.ok) {
-            throw new Error("Gagal mengambil data buku.");
+            throw new Error("Gagal mengambil data buku");
         }
 
         const dataBuku = await response.json();
 
-        tbody.innerHTML = "";
+        tabelBuku.innerHTML = "";
 
         dataBuku.forEach(function (buku) {
             const row = document.createElement("tr");
@@ -29,22 +31,32 @@ async function muatDaftarBuku() {
                 <td>${buku.tahun}</td>
                 <td>${buku.stok}</td>
                 <td>
-                    <button type="button">Edit</button>
-                    <button type="button" class="btn-hapus">Hapus</button>
+                    <button class="btn-edit">
+                        <i class="bi bi-pencil-fill"></i>
+                        Edit
+                    </button>
+
+                    <button class="btn-hapus">
+                        <i class="bi bi-trash-fill"></i>
+                        Hapus
+                    </button>
                 </td>
             `;
 
-            tbody.appendChild(row);
+            tabelBuku.appendChild(row);
         });
-    } catch (error) {
-        console.error(error);
 
-        tbody.innerHTML = `
+    } catch (error) {
+        tabelBuku.innerHTML = `
             <tr>
                 <td colspan="5">Gagal memuat data buku.</td>
             </tr>
         `;
+
+        console.error(error);
     }
 }
 
-document.addEventListener("DOMContentLoaded", muatDaftarBuku);
+document.addEventListener("DOMContentLoaded", function () {
+    tampilkanBuku();
+});
