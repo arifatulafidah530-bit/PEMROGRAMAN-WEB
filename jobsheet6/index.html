@@ -4,118 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SIMPUS-Mini | Beranda</title>
+    <title>LaundryKu | Beranda</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-    <header>
+<header>
+    <div class="brand">
+        <div class="brand-icon">
+            <i class="bi bi-basket-fill"></i>
+        </div>
 
-        <a class="brand" href="index.html">
-            <h1>SIMPUS-Mini</h1>
+        <div>
+            <h1>LaundryKu</h1>
+            <p>Layanan Laundry</p>
+        </div>
+    </div>
+
+    <input type="checkbox" id="nav-toggle">
+
+    <label for="nav-toggle" class="nav-toggle-label">
+        <i class="bi bi-list"></i>
+    </label>
+
+    <nav>
+        <a href="index.html" class="active">
+            <i class="bi bi-house-door-fill"></i>
+            Beranda
         </a>
 
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <a href="pelanggan/list.html">
+            <i class="bi bi-people-fill"></i>
+            Pelanggan
+        </a>
 
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
+        <a href="pelanggan/tambah.html">
+            <i class="bi bi-person-plus-fill"></i>
+            Tambah Pelanggan
+        </a>
 
-        <nav>
-            <ul>
+        <a href="transaksi/list.html">
+            <i class="bi bi-receipt"></i>
+            Transaksi
+        </a>
+    </nav>
+</header>
 
-                <li>
-                    <a class="active" href="index.html">
-                        <i class="bi bi-house-door-fill"></i>
-                        Beranda
-                    </a>
-                </li>
+<main>
 
-                <li>
-                    <a href="buku/list.html">
-                        <i class="bi bi-book-fill"></i>
-                        Daftar Buku
-                    </a>
-                </li>
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-label">LAUNDRYKU</span>
 
-                <li>
-                    <a href="buku/tambah.html">
-                        <i class="bi bi-plus-circle-fill"></i>
-                        Tambah Buku
-                    </a>
-                </li>
+            <h2>Kelola Laundry Jadi Lebih Mudah</h2>
 
-                <li>
-                    <a href="anggota/list.html">
-                        <i class="bi bi-people-fill"></i>
-                        Daftar Anggota
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-    </header>
-
-    <main>
-
-        <section>
-
-            <h2>
-                <i class="bi bi-house-door-fill"></i>
-                Selamat Datang di Sistem Perpustakaan Mini
-            </h2>
-
-            <p class="page-description">
-                Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.
+            <p>
+                Kelola data pelanggan dan transaksi laundry
+                dengan lebih rapi dan praktis.
             </p>
 
-        </section>
+            <a href="transaksi/tambah.html" class="hero-button">
+                <i class="bi bi-plus-circle-fill"></i>
+                Tambah Transaksi
+            </a>
+        </div>
 
-        <section>
+        <div class="hero-icon">
+            <i class="bi bi-basket2-fill"></i>
+        </div>
+    </section>
 
-            <h2>
-                <i class="bi bi-bar-chart-fill"></i>
-                Ringkasan
-            </h2>
+    <section class="section">
 
-            <article>
-                <h3>Total Buku</h3>
-                <p>12</p>
-            </article>
+        <div class="section-heading">
+            <div>
+                <h2>Ringkasan Laundry</h2>
+                <p>Informasi data laundry saat ini.</p>
+            </div>
+        </div>
 
-            <article>
-                <h3>Total Anggota</h3>
-                <p>8</p>
-            </article>
+        <div class="stats-grid">
 
-            <article>
-                <h3>Sedang Dipinjam</h3>
-                <p>3</p>
-            </article>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
 
-            <article>
-                <h3>Buku Terlambat</h3>
-                <p>4</p>
-            </article>
+                <div>
+                    <span>Total Pelanggan</span>
+                    <strong>12</strong>
+                </div>
+            </div>
 
-        </section>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-receipt"></i>
+                </div>
 
-    </main>
+                <div>
+                    <span>Total Transaksi</span>
+                    <strong>25</strong>
+                </div>
+            </div>
 
-    <footer>
-        <p>&copy; 2026 SIMPUS-Mini &mdash; Jobsheet 6 (Fetch API & JSON)</p>
-    </footer>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/app.js"></script>
+                <div>
+                    <span>Sedang Diproses</span>
+                    <strong>8</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div>
+                    <span>Transaksi Selesai</span>
+                    <strong>17</strong>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+
+        <div class="section-heading">
+            <div>
+                <h2>Layanan Laundry</h2>
+                <p>Pilihan layanan yang tersedia.</p>
+            </div>
+        </div>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="bi bi-droplet-fill"></i>
+                </div>
+
+                <h3>Cuci Kering</h3>
+
+                <p>
+                    Layanan mencuci dan mengeringkan pakaian
+                    dengan bersih dan rapi.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="bi bi-stars"></i>
+                </div>
+
+                <h3>Cuci Setrika</h3>
+
+                <p>
+                    Pakaian dicuci, dikeringkan, kemudian
+                    disetrika hingga siap digunakan.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="bi bi-box-seam-fill"></i>
+                </div>
+
+                <h3>Setrika</h3>
+
+                <p>
+                    Layanan khusus untuk membuat pakaian
+                    menjadi lebih rapi.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 LaundryKu. Semua hak dilindungi.</p>
+</footer>
+
+<script src="./assets/js/app.js"></script>
 
 </body>
 </html>

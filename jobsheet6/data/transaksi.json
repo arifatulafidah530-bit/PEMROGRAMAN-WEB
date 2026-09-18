@@ -1,0 +1,37 @@
+[
+    {
+        "pelanggan": "Alya Putri",
+        "layanan": "Cuci Kering",
+        "berat": 3,
+        "total": 18000,
+        "status": "Diproses"
+    },
+    {
+        "pelanggan": "Raka Pratama",
+        "layanan": "Cuci Setrika",
+        "berat": 4,
+        "total": 28000,
+        "status": "Selesai"
+    },
+    {
+        "pelanggan": "Nadia Safitri",
+        "layanan": "Setrika",
+        "berat": 2,
+        "total": 10000,
+        "status": "Diambil"
+    },
+    {
+        "pelanggan": "Dimas Saputra",
+        "layanan": "Cuci Kering",
+        "berat": 5,
+        "total": 30000,
+        "status": "Diproses"
+    },
+    {
+        "pelanggan": "Salsa Amelia",
+        "layanan": "Cuci Setrika",
+        "berat": 3,
+        "total": 21000,
+        "status": "Selesai"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "nama": "Alya Putri",
+        "no_hp": "081234567890",
+        "alamat": "Jl. Soekarno Hatta No. 12",
+        "jenis_layanan": "Cuci Setrika"
+    },
+    {
+        "nama": "Raka Pratama",
+        "no_hp": "082345678901",
+        "alamat": "Jl. Bendungan Sutami No. 8",
+        "jenis_layanan": "Cuci Kering"
+    },
+    {
+        "nama": "Nabila Sari",
+        "no_hp": "083456789012",
+        "alamat": "Jl. Veteran No. 15",
+        "jenis_layanan": "Setrika"
+    },
+    {
+        "nama": "Dimas Saputra",
+        "no_hp": "084567890123",
+        "alamat": "Jl. Tlogomas No. 21",
+        "jenis_layanan": "Cuci Setrika"
+    },
+    {
+        "nama": "Fira Amelia",
+        "no_hp": "085678901234",
+        "alamat": "Jl. Dinoyo No. 10",
+        "jenis_layanan": "Cuci Kering"
+    }
+]
