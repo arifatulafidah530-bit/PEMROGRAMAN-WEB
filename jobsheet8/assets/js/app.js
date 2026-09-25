@@ -12,19 +12,25 @@ function initNavToggle() {
 }
 
 function initHapusConfirm() {
-    const tombolHapus = document.querySelectorAll(".btn-hapus");
+    const formHapus = document.querySelectorAll(".form-hapus");
 
-    tombolHapus.forEach(function (tombol) {
-        tombol.addEventListener("click", function () {
-            const baris = tombol.closest("tr");
-
-            if (confirm("Apakah kamu yakin ingin menghapus data ini?")) {
-                if (baris) {
-                    baris.remove();
-                }
+    formHapus.forEach(function (form) {
+        form.addEventListener("submit", function (event) {
+            if (!confirm("Apakah kamu yakin ingin menghapus data ini?")) {
+                event.preventDefault();
             }
         });
     });
+}
+
+function initFlashNotification() {
+    const flashMessage = document.querySelector(".flash-message");
+
+    if (flashMessage) {
+        window.setTimeout(function () {
+            flashMessage.remove();
+        }, 3500);
+    }
 }
 
 function initTableFilter() {
@@ -80,6 +86,7 @@ function initValidasiForm() {
 document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initHapusConfirm();
+    initFlashNotification();
     initTableFilter();
     initValidasiForm();
 });

@@ -1,10 +1,10 @@
 <?php
 
-$host = "localhost";
-$port = "5432";
-$dbname = "laundryku";
-$user = "postgres";
-$password = "12345678";
+$host = getenv('DB_HOST') ?: 'localhost';
+$port = getenv('DB_PORT') ?: '5432';
+$dbname = getenv('DB_NAME') ?: 'laundryku';
+$user = getenv('DB_USER') ?: 'postgres';
+$password = getenv('DB_PASSWORD') ?: '';
 
 try {
 

@@ -1,4 +1,4 @@
-# Wireframe LaundryKu
+# Wireframe LaundryKu - Jobsheet 8
 
 ## 1. Halaman Beranda
 
@@ -28,7 +28,7 @@ Elemen:
 - Tombol Edit
 - Tombol Hapus
 
-Data pelanggan diambil dari file pelanggan.json menggunakan Fetch API.
+Data pelanggan diambil dari tabel `pelanggan` PostgreSQL menggunakan PDO.
 
 ## 3. Halaman Tambah Pelanggan
 
@@ -40,7 +40,7 @@ Input:
 - Alamat
 - Jenis layanan
 
-Form dilengkapi validasi menggunakan JavaScript.
+Form divalidasi di PHP sebelum data disimpan dengan prepared statement PDO.
 
 ## 4. Halaman Daftar Transaksi
 
@@ -56,7 +56,7 @@ Elemen:
 - Tombol Edit
 - Tombol Hapus
 
-Data transaksi diambil dari file transaksi.json menggunakan Fetch API.
+Data transaksi diambil dari tabel `transaksi` PostgreSQL menggunakan PDO.
 
 ## 5. Halaman Tambah Transaksi
 
@@ -70,15 +70,16 @@ Input:
 - Total biaya
 - Status
 
-Form dilengkapi validasi menggunakan JavaScript.
+Form divalidasi di PHP sebelum data disimpan dengan prepared statement PDO.
 
 ## 6. Teknologi yang Digunakan
 
 Website menggunakan:
+- PHP
+- PostgreSQL
+- PDO
 - HTML
 - CSS
 - Bootstrap
 - Bootstrap Icons
 - JavaScript
-- Fetch API
-- JSON

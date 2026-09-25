@@ -104,15 +104,31 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                     <div class="action-buttons">
 
-                                        <button class="btn-edit">
+                                        <a
+                                            href="edit.php?id=<?= $data['id_pelanggan'] ?>"
+                                            class="btn-edit">
                                             <i class="bi bi-pencil-fill"></i>
                                             Edit
-                                        </button>
+                                        </a>
 
-                                        <button class="btn-hapus">
-                                            <i class="bi bi-trash-fill"></i>
-                                            Hapus
-                                        </button>
+                                        <form
+                                            action="hapus.php"
+                                            method="POST"
+                                            class="form-hapus">
+
+                                            <input
+                                                type="hidden"
+                                                name="id_pelanggan"
+                                                value="<?= $data['id_pelanggan'] ?>">
+
+                                            <button
+                                                type="submit"
+                                                class="btn-hapus">
+                                                <i class="bi bi-trash-fill"></i>
+                                                Hapus
+                                            </button>
+
+                                        </form>
 
                                     </div>
 
