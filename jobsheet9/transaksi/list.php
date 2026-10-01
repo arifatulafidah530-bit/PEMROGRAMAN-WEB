@@ -6,32 +6,59 @@ $active = 'transaksi';
 include __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/koneksi.php';
 
-$stmt = $koneksi->query("
-    SELECT 
-        transaksi.*,
-        pelanggan.nama AS nama_pelanggan
+$perPage = 5;
+$page = max(1, (int) ($_GET['page'] ?? 1));
+$q = trim($_GET['q'] ?? '');
+$where = '';
+$params = [];
+
+if ($q !== '') {
+    $where = "
+        WHERE transaksi.kode ILIKE :q
+        OR pelanggan.nama ILIKE :q
+        OR transaksi.layanan ILIKE :q
+        OR transaksi.status ILIKE :q
+    ";
+    $params[':q'] = '%' . $q . '%';
+}
+
+$stmtCount = $koneksi->prepare(" 
+    SELECT COUNT(*)
     FROM transaksi
-    JOIN pelanggan 
-        ON transaksi.id_pelanggan = pelanggan.id_pelanggan
-    ORDER BY transaksi.id_transaksi DESC
+    JOIN pelanggan ON transaksi.id_pelanggan = pelanggan.id_pelanggan
+    $where
 ");
 
+foreach ($params as $key => $value) {
+    $stmtCount->bindValue($key, $value);
+}
+
+$stmtCount->execute();
+$totalData = (int) $stmtCount->fetchColumn();
+$totalPages = max(1, (int) ceil($totalData / $perPage));
+$page = min($page, $totalPages);
+$offset = ($page - 1) * $perPage;
+
+$stmt = $koneksi->prepare(" 
+    SELECT transaksi.*, pelanggan.nama AS nama_pelanggan
+    FROM transaksi
+    JOIN pelanggan ON transaksi.id_pelanggan = pelanggan.id_pelanggan
+    $where
+    ORDER BY transaksi.id_transaksi DESC
+    LIMIT :limit OFFSET :offset
+");
+
+foreach ($params as $key => $value) {
+    $stmt->bindValue($key, $value);
+}
+
+$stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
 $transaksi = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$jumlahProses = 0;
-$jumlahSelesai = 0;
-
-foreach ($transaksi as $data) {
-
-    if ($data['status'] === 'Diproses') {
-        $jumlahProses++;
-    }
-
-    if ($data['status'] === 'Selesai') {
-        $jumlahSelesai++;
-    }
-
-}
+$jumlahProses = (int) $koneksi->query("SELECT COUNT(*) FROM transaksi WHERE status = 'Diproses'")->fetchColumn();
+$jumlahSelesai = (int) $koneksi->query("SELECT COUNT(*) FROM transaksi WHERE status = 'Selesai'")->fetchColumn();
 
 ?>
 
@@ -68,7 +95,7 @@ foreach ($transaksi as $data) {
                 <span>Total Transaksi</span>
 
                 <strong>
-                    <?= count($transaksi) ?>
+                    <?= $totalData ?>
                 </strong>
 
             </div>
@@ -95,14 +122,17 @@ foreach ($transaksi as $data) {
 
         </div>
 
-        <div class="search-box">
-
+        <form action="list.php" method="GET" class="search-box">
             <input
                 type="text"
-                id="search-box"
+                name="q"
+                value="<?= htmlspecialchars($q) ?>"
                 placeholder="Cari transaksi...">
-
-        </div>
+            <button type="submit">
+                <i class="bi bi-search"></i>
+                Cari
+            </button>
+        </form>
 
         <div class="table-wrapper">
 
@@ -199,13 +229,15 @@ foreach ($transaksi as $data) {
 
                                     <div class="action-buttons">
 
-                                        <button class="btn-edit">
+                                        <a
+                                            href="edit.php?id=<?= $data['id_transaksi'] ?>"
+                                            class="btn-edit">
 
                                             <i class="bi bi-pencil-fill"></i>
 
                                             Edit
 
-                                        </button>
+                                        </a>
 
                                        <form
                                         action="hapus.php"
@@ -244,6 +276,26 @@ foreach ($transaksi as $data) {
             </table>
 
         </div>
+
+        <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="?q=<?= urlencode($q) ?>&page=<?= $page - 1 ?>">&laquo;</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a
+                        href="?q=<?= urlencode($q) ?>&page=<?= $i ?>"
+                        class="<?= $i === $page ? 'active' : '' ?>">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="?q=<?= urlencode($q) ?>&page=<?= $page + 1 ?>">&raquo;</a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
     </div>
 

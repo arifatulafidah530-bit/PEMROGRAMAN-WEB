@@ -35,7 +35,7 @@ include __DIR__ . '/../includes/header.php';
         <?php endif; ?>
 
 
-        <form action="proses_tambah.php" method="POST">
+        <form id="form-tambah" action="proses_tambah.php" method="POST">
 
             <div class="form-grid">
 

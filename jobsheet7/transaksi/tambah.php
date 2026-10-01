@@ -36,6 +36,7 @@ include __DIR__ . '/../includes/header.php';
 
 
         <form
+            id="form-tambah"
             action="proses_tambah.php"
             method="POST">
 

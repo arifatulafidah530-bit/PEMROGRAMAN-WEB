@@ -61,8 +61,6 @@ $pelanggan = $_SESSION['pelanggan'] ?? [];
 
                         <th>Jenis Layanan</th>
 
-                        <th>Aksi</th>
-
                     </tr>
 
                 </thead>
@@ -74,7 +72,7 @@ $pelanggan = $_SESSION['pelanggan'] ?? [];
 
                         <tr>
 
-                            <td colspan="5">
+                            <td colspan="4">
                                 Belum ada data pelanggan.
                             </td>
 
@@ -100,24 +98,6 @@ $pelanggan = $_SESSION['pelanggan'] ?? [];
 
                                 <td>
                                     <?= htmlspecialchars($data['jenis_layanan']) ?>
-                                </td>
-
-                                <td>
-
-                                    <div class="action-buttons">
-
-                                        <button class="btn-edit">
-                                            <i class="bi bi-pencil-fill"></i>
-                                            Edit
-                                        </button>
-
-                                        <button class="btn-hapus">
-                                            <i class="bi bi-trash-fill"></i>
-                                            Hapus
-                                        </button>
-
-                                    </div>
-
                                 </td>
 
                             </tr>

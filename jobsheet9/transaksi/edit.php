@@ -14,9 +14,10 @@ if ($id === '' || !is_numeric($id)) {
 }
 
 $stmt = $koneksi->prepare("
-    SELECT *
+    SELECT transaksi.*, pelanggan.nama AS nama_pelanggan
     FROM transaksi
-    WHERE id_transaksi = :id
+    JOIN pelanggan ON pelanggan.id_pelanggan = transaksi.id_pelanggan
+    WHERE transaksi.id_transaksi = :id
 ");
 
 $stmt->execute([
@@ -86,28 +87,12 @@ $pelanggan = $stmtPelanggan->fetchAll(PDO::FETCH_ASSOC);
                         Nama Pelanggan
                     </label>
 
-                    <select
-                        id="id_pelanggan"
-                        name="id_pelanggan"
-                        required>
-
-                        <option value="">
-                            Pilih pelanggan
-                        </option>
-
+                    <input type="text" id="id_pelanggan" name="id_pelanggan" list="daftar-pelanggan" value="<?= htmlspecialchars($transaksi['nama_pelanggan']) ?>" placeholder="Ketik nama pelanggan" autocomplete="off" required>
+                    <datalist id="daftar-pelanggan">
                         <?php foreach ($pelanggan as $data): ?>
-
-                            <option
-                                value="<?= $data['id_pelanggan'] ?>"
-                                <?= $transaksi['id_pelanggan'] == $data['id_pelanggan'] ? 'selected' : '' ?>>
-
-                                <?= htmlspecialchars($data['nama']) ?>
-
-                            </option>
-
+                            <option value="<?= htmlspecialchars($data['nama']) ?>">
                         <?php endforeach; ?>
-
-                    </select>
+                    </datalist>
 
                 </div>
 

@@ -16,6 +16,12 @@ $berat = trim($_POST['berat'] ?? '');
 $total_biaya = trim($_POST['total_biaya'] ?? '');
 $status = trim($_POST['status'] ?? '');
 
+if ($id_pelanggan !== '' && !ctype_digit($id_pelanggan)) {
+    $stmtPelanggan = $koneksi->prepare('SELECT id_pelanggan FROM pelanggan WHERE LOWER(nama) = LOWER(:nama) LIMIT 1');
+    $stmtPelanggan->execute([':nama' => $id_pelanggan]);
+    $id_pelanggan = (string) ($stmtPelanggan->fetchColumn() ?: '');
+}
+
 if (
     $kode === '' ||
     $id_pelanggan === '' ||

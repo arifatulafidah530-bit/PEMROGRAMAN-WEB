@@ -117,8 +117,6 @@ foreach ($transaksi as $data) {
 
                         <th>Status</th>
 
-                        <th>Aksi</th>
-
                     </tr>
 
                 </thead>
@@ -130,7 +128,7 @@ foreach ($transaksi as $data) {
 
                         <tr>
 
-                            <td colspan="6">
+                            <td colspan="5">
                                 Belum ada data transaksi.
                             </td>
 
@@ -188,31 +186,6 @@ foreach ($transaksi as $data) {
                                         <?= htmlspecialchars($data['status']) ?>
 
                                     </span>
-
-                                </td>
-
-                                <td>
-
-                                    <div class="action-buttons">
-
-                                        <button class="btn-edit">
-
-                                            <i class="bi bi-pencil-fill"></i>
-
-                                            Edit
-
-                                        </button>
-
-
-                                        <button class="btn-hapus">
-
-                                            <i class="bi bi-trash-fill"></i>
-
-                                            Hapus
-
-                                        </button>
-
-                                    </div>
 
                                 </td>
 
