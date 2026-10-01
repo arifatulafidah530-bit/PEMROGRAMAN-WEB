@@ -65,7 +65,7 @@ Jangan menulis tanda kutip dan jangan memakai `localhost` untuk `DB_HOST` produc
 Lokal:
 
 ```powershell
-php -S localhost:8000 -t .\jobsheet8
+php -S localhost:8000 -t .\jobsheet08
 ```
 
 Online:

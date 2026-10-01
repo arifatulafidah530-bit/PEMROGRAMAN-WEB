@@ -2,10 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$base = rtrim(str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME']))), '/');
-if ($base === '/') {
-    $base = '';
-}
+$base = '/' . basename(str_replace('\\', '/', dirname(__DIR__)));
 $active = $active ?? '';
 ?>
 
