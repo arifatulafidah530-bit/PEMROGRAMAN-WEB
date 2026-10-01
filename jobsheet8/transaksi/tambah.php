@@ -154,7 +154,7 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             Pilih status
                         </option>
 
-                        <option value="Diproses">
+                        <option value="Diproses" selected>
                             Diproses
                         </option>
 

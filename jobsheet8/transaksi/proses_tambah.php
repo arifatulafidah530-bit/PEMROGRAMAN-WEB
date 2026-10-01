@@ -15,11 +15,21 @@ $jenis_layanan = trim($_POST['jenis_layanan'] ?? '');
 $berat = trim($_POST['berat'] ?? '');
 $total_biaya = trim($_POST['total_biaya'] ?? '');
 $status = trim($_POST['status'] ?? '');
+$pelanggan_tidak_ditemukan = false;
 
 if ($id_pelanggan !== '' && !ctype_digit($id_pelanggan)) {
-    $stmtPelanggan = $koneksi->prepare('SELECT id_pelanggan FROM pelanggan WHERE LOWER(nama) = LOWER(:nama) LIMIT 1');
-    $stmtPelanggan->execute([':nama' => $id_pelanggan]);
-    $id_pelanggan = (string) ($stmtPelanggan->fetchColumn() ?: '');
+    $namaPelanggan = preg_replace('/\s+/', ' ', $id_pelanggan);
+    $stmtPelanggan = $koneksi->prepare('SELECT id_pelanggan FROM pelanggan WHERE LOWER(TRIM(nama)) = LOWER(TRIM(:nama)) LIMIT 1');
+    $stmtPelanggan->execute([':nama' => $namaPelanggan]);
+    $id_pelangganDitemukan = $stmtPelanggan->fetchColumn();
+    $id_pelanggan = (string) ($id_pelangganDitemukan ?: '');
+    $pelanggan_tidak_ditemukan = $id_pelanggan === '';
+}
+
+if ($pelanggan_tidak_ditemukan) {
+    $_SESSION['flash'] = ['type' => 'error', 'message' => 'Nama pelanggan tidak ditemukan. Pilih atau ketik nama pelanggan yang sudah terdaftar.'];
+    header('Location: tambah.php');
+    exit;
 }
 
 if (
