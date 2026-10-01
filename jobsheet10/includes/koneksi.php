@@ -32,6 +32,7 @@ try {
         PDO::ERRMODE_EXCEPTION
     );
 
+    $koneksi->exec('CREATE TABLE IF NOT EXISTS users (id_user SERIAL PRIMARY KEY, username VARCHAR(50) NOT NULL UNIQUE, nama VARCHAR(100) NOT NULL, password_hash VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL DEFAULT \'petugas\', created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)');
     $koneksi->exec('CREATE TABLE IF NOT EXISTS tarif_layanan (id_tarif SERIAL PRIMARY KEY, nama VARCHAR(50) NOT NULL UNIQUE, harga_per_kg INTEGER NOT NULL CHECK (harga_per_kg >= 0))');
     $koneksi->exec("INSERT INTO tarif_layanan (nama, harga_per_kg) VALUES ('Cuci Kering', 5000), ('Cuci Setrika', 7000), ('Setrika', 4000) ON CONFLICT (nama) DO NOTHING");
     $koneksi->exec("ALTER TABLE transaksi ADD COLUMN IF NOT EXISTS dibayar INTEGER NOT NULL DEFAULT 0");
