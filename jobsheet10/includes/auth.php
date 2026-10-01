@@ -5,11 +5,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    $base = rtrim(str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME']))), '/');
-    if ($base === '/') {
-        $base = '';
-    }
-
+    $scriptPath = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    $projectName = basename(str_replace('\\', '/', dirname(__DIR__)));
+    $base = str_contains($scriptPath, '/' . $projectName . '/') ? '/' . $projectName : '';
     header('Location: ' . $base . '/login.php');
     exit;
 }

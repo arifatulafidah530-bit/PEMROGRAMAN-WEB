@@ -83,10 +83,31 @@ function initValidasiForm() {
     });
 }
 
+function initPriceCalculator() {
+    const service = document.querySelector('#jenis_layanan');
+    const weight = document.querySelector('#berat');
+    const total = document.querySelector('#total_biaya');
+
+    if (!service || !weight || !total) {
+        return;
+    }
+
+    const updateTotal = function () {
+        const selected = service.options[service.selectedIndex];
+        const price = Number(selected?.dataset.harga || 0);
+        const amount = Number(weight.value || 0);
+        total.value = price > 0 && amount > 0 ? Math.ceil(price * amount) : '';
+    };
+
+    service.addEventListener('change', updateTotal);
+    weight.addEventListener('input', updateTotal);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initHapusConfirm();
     initFlashNotification();
     initTableFilter();
     initValidasiForm();
+    initPriceCalculator();
 });

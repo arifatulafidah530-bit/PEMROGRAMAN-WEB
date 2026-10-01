@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/includes/auth.php';
+
 $title = 'LaundryKu | Beranda';
 $active = 'beranda';
 
@@ -33,6 +35,8 @@ $stmtSelesai = $koneksi->query("
 ");
 
 $jumlahSelesai = $stmtSelesai->fetchColumn();
+$totalPendapatan = $koneksi->query('SELECT COALESCE(SUM(total_biaya), 0) FROM transaksi')->fetchColumn();
+$totalDibayar = $koneksi->query('SELECT COALESCE(SUM(dibayar), 0) FROM transaksi')->fetchColumn();
 
 ?>
 
@@ -62,6 +66,23 @@ $jumlahSelesai = $stmtSelesai->fetchColumn();
             <i class="bi bi-basket2-fill"></i>
         </div>
 
+    </section>
+
+    <section class="section">
+        <div class="section-heading">
+            <h2>Ringkasan Keuangan</h2>
+            <p>Nilai transaksi dan pembayaran yang sudah diterima.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-cash-stack"></i></div>
+                <div><span>Total Nilai Transaksi</span><strong>Rp<?= number_format((int) $totalPendapatan, 0, ',', '.') ?></strong></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-wallet2"></i></div>
+                <div><span>Total Sudah Dibayar</span><strong>Rp<?= number_format((int) $totalDibayar, 0, ',', '.') ?></strong></div>
+            </div>
+        </div>
     </section>
 
     <section class="section">

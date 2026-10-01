@@ -113,11 +113,6 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 value="<?= htmlspecialchars($q) ?>"
                 placeholder="Cari pelanggan...">
 
-            <button type="submit">
-                <i class="bi bi-search"></i>
-                Cari
-            </button>
-
         </form>
 
         <div class="table-wrapper">
@@ -179,6 +174,11 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td>
 
                                     <div class="action-buttons">
+
+                                        <a href="../transaksi/list.php?q=<?= urlencode($data['nama']) ?>" class="btn-print">
+                                            <i class="bi bi-clock-history"></i>
+                                            Riwayat
+                                        </a>
 
                                         <a
                                             href="edit.php?id=<?= $data['id_pelanggan'] ?>"

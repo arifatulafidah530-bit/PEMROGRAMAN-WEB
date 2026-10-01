@@ -37,6 +37,14 @@ if (
     exit;
 }
 
+$cekKode = $koneksi->prepare('SELECT COUNT(*) FROM transaksi WHERE kode = :kode AND id_transaksi <> :id');
+$cekKode->execute([':kode' => $kode, ':id' => $id]);
+if ((int) $cekKode->fetchColumn() > 0) {
+    $_SESSION['flash'] = ['type' => 'error', 'message' => 'Kode transaksi sudah digunakan.'];
+    header('Location: list.php');
+    exit;
+}
+
 try {
     $stmt = $koneksi->prepare("
         UPDATE transaksi

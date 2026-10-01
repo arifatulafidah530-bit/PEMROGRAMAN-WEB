@@ -130,10 +130,6 @@ $jumlahSelesai = (int) $koneksi->query("SELECT COUNT(*) FROM transaksi WHERE sta
                 name="q"
                 value="<?= htmlspecialchars($q) ?>"
                 placeholder="Cari transaksi...">
-            <button type="submit">
-                <i class="bi bi-search"></i>
-                Cari
-            </button>
         </form>
 
         <div class="table-wrapper">
@@ -239,6 +235,11 @@ $jumlahSelesai = (int) $koneksi->query("SELECT COUNT(*) FROM transaksi WHERE sta
 
                                             Edit
 
+                                        </a>
+
+                                        <a href="struk.php?id=<?= $data['id_transaksi'] ?>" class="btn-print" target="_blank">
+                                            <i class="bi bi-printer-fill"></i>
+                                            Struk
                                         </a>
 
                                        <form

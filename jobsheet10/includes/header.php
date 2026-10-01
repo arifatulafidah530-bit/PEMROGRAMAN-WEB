@@ -2,10 +2,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$base = rtrim(str_replace('\\', '/', dirname(dirname($_SERVER['SCRIPT_NAME']))), '/');
-if ($base === '/') {
-    $base = '';
-}
+$scriptPath = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+$projectName = basename(str_replace('\\', '/', dirname(__DIR__)));
+$base = str_contains($scriptPath, '/' . $projectName . '/') ? '/' . $projectName : '';
 $active = $active ?? '';
 $sudahLogin = isset($_SESSION['user_id']);
 ?>

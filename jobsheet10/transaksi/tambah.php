@@ -15,6 +15,7 @@ $stmt = $koneksi->query("
 ");
 
 $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$tarif = $koneksi->query('SELECT nama, harga_per_kg FROM tarif_layanan ORDER BY nama')->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -60,7 +61,7 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         type="text"
                         id="kode"
                         name="kode"
-                        required>
+                        placeholder="Se genera automáticamente si se deja vacío">
 
                 </div>
 
@@ -90,21 +91,12 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         name="jenis_layanan"
                         required>
 
-                        <option value="">
-                            Pilih layanan
-                        </option>
-
-                        <option value="Cuci Kering">
-                            Cuci Kering
-                        </option>
-
-                        <option value="Cuci Setrika">
-                            Cuci Setrika
-                        </option>
-
-                        <option value="Setrika">
-                            Setrika
-                        </option>
+                        <option value="">Pilih layanan</option>
+                        <?php foreach ($tarif as $layanan): ?>
+                            <option value="<?= htmlspecialchars($layanan['nama']) ?>" data-harga="<?= (int) $layanan['harga_per_kg'] ?>">
+                                <?= htmlspecialchars($layanan['nama']) ?> - Rp<?= number_format((int) $layanan['harga_per_kg'], 0, ',', '.') ?>/kg
+                            </option>
+                        <?php endforeach; ?>
 
                     </select>
 
@@ -137,8 +129,14 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         id="total_biaya"
                         name="total_biaya"
                         min="0"
+                        readonly
                         required>
 
+                </div>
+
+                <div class="form-group">
+                    <label for="dibayar">Dibayar</label>
+                    <input type="number" id="dibayar" name="dibayar" min="0" value="0" required>
                 </div>
 
                 <div class="form-group">
@@ -156,9 +154,13 @@ $pelanggan = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             Pilih status
                         </option>
 
-                        <option value="Diproses">
+                        <option value="Diproses" selected>
                             Diproses
                         </option>
+
+                        <option value="Dicuci">Dicuci</option>
+
+                        <option value="Disetrika">Disetrika</option>
 
                         <option value="Selesai">
                             Selesai
