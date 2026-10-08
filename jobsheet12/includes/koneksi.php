@@ -1,12 +1,20 @@
 <?php
 
 $railwayEnvironment = getenv('RAILWAY_ENVIRONMENT') !== false;
-$host = getenv('PGHOST') ?: ($railwayEnvironment ? '' : 'localhost');
-$port = getenv('PGPORT') ?: '5432';
-$dbname = getenv('PGDATABASE') ?: ($railwayEnvironment ? '' : 'laundryku');
-$user = getenv('PGUSER') ?: ($railwayEnvironment ? '' : 'postgres');
-$password = getenv('PGPASSWORD') ?: ($railwayEnvironment ? '' : '12345678');
-$sslmode = getenv('PGSSLMODE') ?: ($railwayEnvironment ? 'require' : 'prefer');
+$databaseUrl = getenv('DATABASE_URL') ?: '';
+$urlParts = $databaseUrl !== '' ? parse_url($databaseUrl) : false;
+$urlQuery = [];
+
+if (is_array($urlParts) && isset($urlParts['query'])) {
+    parse_str($urlParts['query'], $urlQuery);
+}
+
+$host = getenv('PGHOST') ?: getenv('DB_HOST') ?: ($urlParts['host'] ?? ($railwayEnvironment ? '' : 'localhost'));
+$port = getenv('PGPORT') ?: getenv('DB_PORT') ?: ($urlParts['port'] ?? '5432');
+$dbname = getenv('PGDATABASE') ?: getenv('DB_NAME') ?: (isset($urlParts['path']) ? ltrim($urlParts['path'], '/') : ($railwayEnvironment ? '' : 'laundryku'));
+$user = getenv('PGUSER') ?: getenv('DB_USER') ?: (isset($urlParts['user']) ? rawurldecode($urlParts['user']) : ($railwayEnvironment ? '' : 'postgres'));
+$password = getenv('PGPASSWORD') ?: getenv('DB_PASSWORD') ?: (isset($urlParts['pass']) ? rawurldecode($urlParts['pass']) : ($railwayEnvironment ? '' : '12345678'));
+$sslmode = getenv('PGSSLMODE') ?: ($urlQuery['sslmode'] ?? ($railwayEnvironment ? 'require' : 'prefer'));
 
 try {
     if ($host === '' || $dbname === '' || $user === '' || $password === '') {
