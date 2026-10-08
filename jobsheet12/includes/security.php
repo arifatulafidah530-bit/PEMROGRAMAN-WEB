@@ -9,6 +9,29 @@ function e(mixed $value): string
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
 
+function app_base_path(): string
+{
+    $appRoot = realpath(dirname(__DIR__));
+    $documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+
+    if ($appRoot === false || $documentRoot === false) {
+        return '';
+    }
+
+    $appRoot = rtrim(str_replace('\\', '/', $appRoot), '/');
+    $documentRoot = rtrim(str_replace('\\', '/', $documentRoot), '/');
+
+    if ($appRoot === $documentRoot) {
+        return '';
+    }
+
+    if (str_starts_with($appRoot, $documentRoot . '/')) {
+        return '/' . substr($appRoot, strlen($documentRoot) + 1);
+    }
+
+    return '';
+}
+
 function csrf_token(): string
 {
     if (empty($_SESSION['csrf_token'])) {

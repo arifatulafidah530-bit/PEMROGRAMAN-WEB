@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    $base = '/' . basename(str_replace('\\', '/', dirname(__DIR__)));
+    $base = app_base_path();
     header('Location: ' . $base . '/login.php');
     exit;
 }

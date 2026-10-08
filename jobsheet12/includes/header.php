@@ -4,7 +4,7 @@ require_once __DIR__ . '/security.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$base = '/' . basename(str_replace('\\', '/', dirname(__DIR__)));
+$base = app_base_path();
 $active = $active ?? '';
 $sudahLogin = isset($_SESSION['user_id']);
 ?>
