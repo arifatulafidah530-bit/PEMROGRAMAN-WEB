@@ -1,15 +1,20 @@
 <?php
 
-$host = "localhost";
-$port = "5432";
-$dbname = "laundryku";
-$user = "postgres";
-$password = "12345678";
+$railwayEnvironment = getenv('RAILWAY_ENVIRONMENT') !== false;
+$host = getenv('PGHOST') ?: ($railwayEnvironment ? '' : 'localhost');
+$port = getenv('PGPORT') ?: '5432';
+$dbname = getenv('PGDATABASE') ?: ($railwayEnvironment ? '' : 'laundryku');
+$user = getenv('PGUSER') ?: ($railwayEnvironment ? '' : 'postgres');
+$password = getenv('PGPASSWORD') ?: ($railwayEnvironment ? '' : '12345678');
+$sslmode = getenv('PGSSLMODE') ?: ($railwayEnvironment ? 'require' : 'prefer');
 
 try {
+    if ($host === '' || $dbname === '' || $user === '' || $password === '') {
+        throw new RuntimeException('Konfigurasi koneksi PostgreSQL Railway belum lengkap. Atur PGHOST, PGDATABASE, PGUSER, dan PGPASSWORD.');
+    }
 
     $koneksi = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$dbname",
+        "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=$sslmode",
         $user,
         $password
     );
